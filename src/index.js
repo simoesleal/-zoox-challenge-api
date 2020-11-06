@@ -1,14 +1,11 @@
-const http = require('http');
+const LOGGER = require('./logger').createLogger('ROOT SERVER')
+const Server = require('./server/server')
+const config = require('./config/config')
+const bluebird = require('bluebird')
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const PORT = process.env.FAST_DELIVERY_API_PORT || config.api.port
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
-});
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+global.Promise = bluebird
+Server.listen(PORT, () => {
+	LOGGER.info(`Server is running on PORT=${PORT}`)
+})
