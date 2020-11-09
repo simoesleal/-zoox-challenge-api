@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const LOGGER = require('../logger').createLogger('Default')
+const ApiException = require('../exceptions/ApiException')
 
 router.get('/', (req, res) => {
 	LOGGER.info('Entering in default router')

@@ -5,7 +5,11 @@ const NODE_ENV = process.env.NODE_ENV
 if (NODE_ENV === 'development' || NODE_ENV === 'test') dotenv.config()
 
 const config = {
-	db: {},
+	db: {
+		host: process.env.FAST_DELIVERY_DATABASE_HOST || 'localhost',
+		port: process.env.FAST_DELIVERY_DATABASE_PORT || 27017,
+		database: (NODE_ENV === 'production') ? process.env.ZOOX_CHALLENGE_DATABASE_PRODUCTION : (NODE_ENV === 'development') ? process.env.ZOOX_CHALLENGE_DATABASE_DEV : (NODE_ENV === 'homolog') ? process.env.ZOOX_CHALLENGE_DATABASE_HOMOLOG : process.env.ZOOX_CHALLENGE_DATABASE_TEST
+	},
 	auth: {
 		secret: process.env.ZOOX_CHALLENGE_JWT_SECRET || 'secret'
 	},
