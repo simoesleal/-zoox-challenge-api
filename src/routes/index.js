@@ -3,6 +3,7 @@ const LOGGER = require("../logger").createLogger("Default");
 const ApiException = require("../exceptions/ApiException");
 
 const State = require("../api/state/state.router");
+const City = require("../api/city/city.router");
 
 router.get("/", (req, res) => {
   LOGGER.info("Entering in default router");
@@ -25,5 +26,7 @@ router.get("/err", (req, res, next) => {
 });
 
 router.use("/states", State);
+
+router.use("/cities", City);
 
 module.exports = router;

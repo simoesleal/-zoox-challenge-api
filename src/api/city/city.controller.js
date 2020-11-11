@@ -1,14 +1,14 @@
-const LOGGER = require("../../logger").createLogger("STATE_CONTROLLER");
+const LOGGER = require("../../logger").createLogger("CITY_CONTROLLER");
 const ApiException = require("../../exceptions/ApiException");
 const ApiResultData = require("../../models/ApiResultData");
-const StateService = require("./state.service");
+const CityService = require("./city.service");
 const { HTTP_OK, HTTP_BAD_REQUEST } = require("../utils/Constants");
 
-class StateController {
-  async getStates(req, res, next) {
-    LOGGER.info("Entering in method getStates.");
+class CityController {
+  async getCities(req, res, next) {
+    LOGGER.info("Entering in method getCities.");
     try {
-      const response = await StateService.getStates(req.query);
+      const response = await CityService.getCities(req.query);
       LOGGER.info(
         `Successfully answered the CountryController request. Response: ${JSON.stringify(
           response
@@ -19,7 +19,7 @@ class StateController {
         .json(
           new ApiResultData(
             HTTP_OK,
-            "Consulta da lista de estados realizada com sucesso.",
+            "Consulta da lista de cidades realizada com sucesso.",
             response
           )
         );
@@ -28,7 +28,7 @@ class StateController {
       next(
         new ApiException(
           error.httpStatus || HTTP_BAD_REQUEST,
-          "Não foi possível buscar a lista de estados. Por favor, tente novamente. Detalhes do erro: " +
+          "Não foi possível buscar a lista de cidades. Por favor, tente novamente. Detalhes do erro: " +
             error.message,
           { code: error.code, message: error.message }
         )
@@ -36,12 +36,12 @@ class StateController {
     }
   }
 
-  async getStateById(req, res, next) {
-    LOGGER.info("Entering in method getStateById.");
+  async getCityById(req, res, next) {
+    LOGGER.info("Entering in method getCityById.");
     try {
-      const response = await StateService.getStateById(req.params);
+      const response = await CityService.getCityById(req.params);
       LOGGER.info(
-        `Successfully answered the getStateById request. Response: ${JSON.stringify(
+        `Successfully answered the getCityById request. Response: ${JSON.stringify(
           response
         )}.`
       );
@@ -50,7 +50,7 @@ class StateController {
         .json(
           new ApiResultData(
             HTTP_OK,
-            "Consulta do estado realizada com sucesso.",
+            "Consulta do cidade realizada com sucesso.",
             response
           )
         );
@@ -59,7 +59,7 @@ class StateController {
       next(
         new ApiException(
           error.httpStatus || HTTP_BAD_REQUEST,
-          "Não foi possível buscar o estado. Por favor, tente novamente. Detalhes do erro: " +
+          "Não foi possível buscar a cidade. Por favor, tente novamente. Detalhes do erro: " +
             error.message,
           { code: error.code, message: error.message }
         )
@@ -67,26 +67,26 @@ class StateController {
     }
   }
 
-  async insertState(req, res, next) {
-    LOGGER.info("Entering in method insertState.");
+  async insertCity(req, res, next) {
+    LOGGER.info("Entering in method insertCity.");
     try {
-      const response = await StateService.insertState(req.body);
+      const response = await CityService.insertCity(req.body);
       LOGGER.info(
-        `Successfully answered the insertState request. Response: ${JSON.stringify(
+        `Successfully answered the insertCity request. Response: ${JSON.stringify(
           response
         )}.`
       );
       return res
         .status(HTTP_OK)
         .json(
-          new ApiResultData(HTTP_OK, "Estado salvo com sucesso.", response)
+          new ApiResultData(HTTP_OK, "Cidade salva com sucesso.", response)
         );
     } catch (error) {
       LOGGER.error(JSON.stringify(error));
       next(
         new ApiException(
           error.httpStatus || HTTP_BAD_REQUEST,
-          "Não foi possível salvar este estado. Por favor, tente novamente. Detalhes do erro: " +
+          "Não foi possível salvar esta Cidade. Por favor, tente novamente. Detalhes do erro: " +
             error.message,
           { code: error.code, message: error.message }
         )
@@ -94,26 +94,26 @@ class StateController {
     }
   }
 
-  async updateState(req, res, next) {
-    LOGGER.info("Entering in method updateState.");
+  async updateCity(req, res, next) {
+    LOGGER.info("Entering in method updateCity.");
     try {
-      const response = await StateService.updateState(req.params, req.body);
+      const response = await CityService.updateCity(req.params, req.body);
       LOGGER.info(
-        `Successfully answered the updateState request. Response: ${JSON.stringify(
+        `Successfully answered the updateCity request. Response: ${JSON.stringify(
           response
         )}.`
       );
       return res
         .status(HTTP_OK)
         .json(
-          new ApiResultData(HTTP_OK, "Estado atualizado com sucesso.", response)
+          new ApiResultData(HTTP_OK, "Cidade atualizada com sucesso.", response)
         );
     } catch (error) {
       LOGGER.error(JSON.stringify(error));
       next(
         new ApiException(
           error.httpStatus || HTTP_BAD_REQUEST,
-          "Não foi possível atualizar este estado. Por favor, tente novamente. Detalhes do erro: " +
+          "Não foi possível atualizar esta cidade. Por favor, tente novamente. Detalhes do erro: " +
             error.message,
           { code: error.code, message: error.message }
         )
@@ -121,12 +121,12 @@ class StateController {
     }
   }
 
-  async deleteState(req, res, next) {
-    LOGGER.info("Entering in method deleteState.");
+  async deleteCity(req, res, next) {
+    LOGGER.info("Entering in method deleteCity.");
     try {
-      const response = await StateService.deleteState(req.params);
+      const response = await CityService.deleteCity(req.params);
       LOGGER.info(
-        `Successfully answered the deleteState request. Response: ${JSON.stringify(
+        `Successfully answered the deleteCity request. Response: ${JSON.stringify(
           response
         )}.`
       );
@@ -149,4 +149,4 @@ class StateController {
   }
 }
 
-module.exports = new StateController();
+module.exports = new CityController();
