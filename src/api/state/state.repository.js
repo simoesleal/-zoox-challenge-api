@@ -1,9 +1,13 @@
 const LOGGER = require("../../logger").createLogger("STATE_REPOSITORY");
 const camelize = require("camelize");
 const { getDb, getPrimaryKey } = require("../../database/index");
-const projectState = { _id: 1, name: 1, abbreviation: 1 };
+const projectState = { _id: 1, name: 1, abbreviation: 1, region: 1 };
 
 class StateRepository {
+  /**
+   * @description Get the database instance, set the collection and make the database call.
+   * @param {json} query
+   */
   async getStates(query) {
     LOGGER.info("Entering in method getStates.");
     try {
@@ -26,6 +30,10 @@ class StateRepository {
     }
   }
 
+  /**
+   * @description Get the database instance, set the collection and make the database call.
+   * @param {string} id
+   */
   async getStateById(id) {
     LOGGER.info("Entering in method getStateById.");
     try {
@@ -45,6 +53,10 @@ class StateRepository {
     }
   }
 
+  /**
+   * @description Get the database instance, set the collection and make the database call.
+   * @param {json} payload
+   */
   async insertState(payload) {
     LOGGER.info("Entering in method insertState.");
     try {
@@ -64,11 +76,16 @@ class StateRepository {
     }
   }
 
+  /**
+   * @description Get the database instance, set the collection and make the database call.
+   * @param {string} id
+   * @param {json} payload
+   */
   async updateState(id, payload) {
     LOGGER.info("Entering in method updateState.");
     try {
       const _id = getPrimaryKey(id);
-      console.log('_id', _id);
+      console.log("_id", _id);
       const db = await getDb();
       const collection = db.collection("states");
       const state = await collection.updateOne({ _id: _id }, { $set: payload });
@@ -84,6 +101,10 @@ class StateRepository {
     }
   }
 
+  /**
+   * @description Get the database instance, set the collection and make the database call.
+   * @param {id} string
+   */
   async deleteState(id) {
     LOGGER.info("Entering in method deleteState.");
     try {

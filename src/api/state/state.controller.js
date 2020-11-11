@@ -5,6 +5,14 @@ const StateService = require("./state.service");
 const { HTTP_OK, HTTP_BAD_REQUEST } = require("../utils/Constants");
 
 class StateController {
+  /**
+   * @description Get a list of states.
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {ApiResultData}
+   * @throws {error}
+   */
   async getStates(req, res, next) {
     LOGGER.info("Entering in method getStates.");
     try {
@@ -36,6 +44,14 @@ class StateController {
     }
   }
 
+  /**
+   * @description Serach for a state by it id.
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {ApiResultData}
+   * @throws {error}
+   */
   async getStateById(req, res, next) {
     LOGGER.info("Entering in method getStateById.");
     try {
@@ -67,6 +83,14 @@ class StateController {
     }
   }
 
+  /**
+   * @description Create a new state.
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {ApiResultData}
+   * @throws {error}
+   */
   async insertState(req, res, next) {
     LOGGER.info("Entering in method insertState.");
     try {
@@ -94,6 +118,14 @@ class StateController {
     }
   }
 
+  /**
+   * @description Update a state.
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {ApiResultData}
+   * @throws {error}
+   */
   async updateState(req, res, next) {
     LOGGER.info("Entering in method updateState.");
     try {
@@ -121,6 +153,14 @@ class StateController {
     }
   }
 
+  /**
+   * @description Delete a state.
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {ApiResultData}
+   * @throws {error}
+   */
   async deleteState(req, res, next) {
     LOGGER.info("Entering in method deleteState.");
     try {

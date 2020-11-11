@@ -5,6 +5,14 @@ const CityService = require("./city.service");
 const { HTTP_OK, HTTP_BAD_REQUEST } = require("../utils/Constants");
 
 class CityController {
+  /**
+   * @description Get a list of cities.
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {ApiResultData}
+   * @throws {error}
+   */
   async getCities(req, res, next) {
     LOGGER.info("Entering in method getCities.");
     try {
@@ -36,6 +44,14 @@ class CityController {
     }
   }
 
+  /**
+   * @description Serach for a city by it id.
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {ApiResultData}
+   * @throws {error}
+   */
   async getCityById(req, res, next) {
     LOGGER.info("Entering in method getCityById.");
     try {
@@ -67,6 +83,14 @@ class CityController {
     }
   }
 
+  /**
+   * @description Create a new city.
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {ApiResultData}
+   * @throws {error}
+   */
   async insertCity(req, res, next) {
     LOGGER.info("Entering in method insertCity.");
     try {
@@ -94,6 +118,14 @@ class CityController {
     }
   }
 
+  /**
+   * @description Update a city.
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {ApiResultData}
+   * @throws {error}
+   */
   async updateCity(req, res, next) {
     LOGGER.info("Entering in method updateCity.");
     try {
@@ -121,6 +153,14 @@ class CityController {
     }
   }
 
+  /**
+   * @description Delete a city.
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {ApiResultData}
+   * @throws {error}
+   */
   async deleteCity(req, res, next) {
     LOGGER.info("Entering in method deleteCity.");
     try {

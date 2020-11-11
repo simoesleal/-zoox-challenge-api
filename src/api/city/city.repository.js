@@ -1,9 +1,12 @@
 const LOGGER = require("../../logger").createLogger("CITY_REPOSITORY");
 const camelize = require("camelize");
 const { getDb, getPrimaryKey } = require("../../database/index");
-const projectCity = { _id: 1, name: 1, abbreviation: 1, stateId: 1 };
-
+const StateService = require("../state/state.service");
 class CityRepository {
+  /**
+   * @description Get the database instance, set the collection and make the database call.
+   * @param {string} query
+   */
   async getCities(query) {
     LOGGER.info("Entering in method getCities.");
     try {
@@ -26,6 +29,10 @@ class CityRepository {
     }
   }
 
+  /**
+   * @description Get the database instance, set the collection and make the database call.
+   * @param {string} id
+   */
   async getCityById(id) {
     LOGGER.info("Entering in method getCityById.");
     try {
@@ -33,7 +40,10 @@ class CityRepository {
       const db = await getDb();
       const collection = db.collection("cities");
       const dbResponse = await collection.findOne({ _id: _id });
+      const getState = await StateService.getStateById(dbResponse.stateId);
       dbResponse._id = dbResponse._id.toString();
+      dbResponse.stateId = dbResponse.stateId.toString();
+      dbResponse.state = getState;
       const response = dbResponse;
       LOGGER.info("Returning response from method getCityById.");
       if (response) return camelize(response);
@@ -45,6 +55,10 @@ class CityRepository {
     }
   }
 
+  /**
+   * @description Get the database instance, set the collection and make the database call.
+   * @param {json} payload
+   */
   async insertCity(payload) {
     LOGGER.info("Entering in method insertCity.");
     try {
@@ -62,6 +76,10 @@ class CityRepository {
     }
   }
 
+  /**
+   * @description Get the database instance, set the collection and make the database call.
+   * @param {json} payload
+   */
   async updateCity(id, payload) {
     LOGGER.info("Entering in method updateCity.");
     try {
@@ -83,6 +101,10 @@ class CityRepository {
     }
   }
 
+  /**
+   * @description Get the database instance, set the collection and make the database call.
+   * @param {json} payload
+   */
   async deleteCity(id) {
     LOGGER.info("Entering in method deleteCity.");
     try {

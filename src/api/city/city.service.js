@@ -3,6 +3,11 @@ const CityValidation = require("./city.validations");
 const CityRepository = require("./city.repository");
 
 class CityService {
+  /**
+   * @description Get a list of cities, the list can be filtered by the query parameter.
+   * @param {json} query
+   * @returns {array} dbResponse
+   */
   async getCities(query) {
     LOGGER.info("Entering in method getCities.");
     try {
@@ -17,6 +22,11 @@ class CityService {
     }
   }
 
+  /**
+   * @description Serach for a city by it id.
+   * @param {string} id
+   * @returns {json} dbResponse
+   */
   async getCityById({ id }) {
     LOGGER.info(
       `Entering in methods getCityById, with parameters - city id: [${id}].`
@@ -33,6 +43,12 @@ class CityService {
     }
   }
 
+  /**
+   * @description Create a new city.
+   * @param {string} name
+   * @param {string} stateId
+   * @returns {} dbresponse
+   */
   async insertCity({ name, stateId }) {
     LOGGER.info(
       `Entering in method insertCity, with body parameter: name: [${name}], stateId: [${stateId}].`
@@ -55,6 +71,13 @@ class CityService {
     }
   }
 
+  /**
+   * @description Update a city.
+   * @param {string} id
+   * @param {string} name
+   * @param {string} stateId
+   * @returns {} dbresponse
+   */
   async updateCity({ id }, { name, stateId }) {
     LOGGER.info(
       `Entering in method updateCity, with parameter id: [${id}] with body parameter: name: [${name}], stateId: [${stateId}].`
@@ -77,6 +100,11 @@ class CityService {
     }
   }
 
+  /**
+   * @description Delete a city.
+   * @param {string} id
+   * @returns {} dbresponse
+   */
   async deleteCity({ id }) {
     LOGGER.info(
       `Entering in methods deleteCity, with parameters - state id: [${id}].`

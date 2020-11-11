@@ -7,7 +7,7 @@ const { getPrimaryKey } = require("../../database/index");
 
 class CityValidation {
   /**
-   * @description Validate the parameters to create a new State.
+   * @description Validate the parameters to create a new City.
    * @param {string} name
    * @param {string} stateId
    * @throws {BusinessError} Throws an object with httpStatus, the error message and the error code.
@@ -35,7 +35,7 @@ class CityValidation {
     return { name, stateId, createdAt, updateAt };
   }
   /**
-   * @description Validate the parameters to create a new State.
+   * @description Validate the parameters to update a City.
    * @param {string} name
    * @param {string} abbreviation
    * @param {string} region
