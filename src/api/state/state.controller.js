@@ -69,11 +69,86 @@ class StateController {
     }
   }
 
-  async insertState(req, res, next) {}
+  async insertState(req, res, next) {
+    LOGGER.info("Entering in method insertState.");
+    try {
+      const response = await StateService.insertState(req.body);
+      LOGGER.info(
+        `Successfully answered the insertState request. Response: ${JSON.stringify(
+          response
+        )}.`
+      );
+      return res
+        .status(HTTP_OK)
+        .json(
+          new ApiResultData(HTTP_OK, "Estado salvo com sucesso.", response)
+        );
+    } catch (error) {
+      LOGGER.error(JSON.stringify(error));
+      next(
+        new ApiException(
+          error.httpStatus || HTTP_BAD_REQUEST,
+          "Não foi possível salvar este estado. Por favor, tente novamente. Detalhes do erro: " +
+            error.message,
+          { code: error.code, message: error.message }
+        )
+      );
+    }
+  }
 
-  async updateState(req, res, next) {}
+  async updateState(req, res, next) {
+    LOGGER.info("Entering in method updateState.");
+    try {
+      const response = await StateService.updateState(req.params, req.body);
+      LOGGER.info(
+        `Successfully answered the updateState request. Response: ${JSON.stringify(
+          response
+        )}.`
+      );
+      return res
+        .status(HTTP_OK)
+        .json(
+          new ApiResultData(HTTP_OK, "Estado atualizado com sucesso.", response)
+        );
+    } catch (error) {
+      LOGGER.error(JSON.stringify(error));
+      next(
+        new ApiException(
+          error.httpStatus || HTTP_BAD_REQUEST,
+          "Não foi possível atualizar este estado. Por favor, tente novamente. Detalhes do erro: " +
+            error.message,
+          { code: error.code, message: error.message }
+        )
+      );
+    }
+  }
 
-  async deleteState(req, res, next) {}
+  async deleteState(req, res, next) {
+    LOGGER.info("Entering in method deleteState.");
+    try {
+      const response = await StateService.deleteState(req.params);
+      LOGGER.info(
+        `Successfully answered the deleteState request. Response: ${JSON.stringify(
+          response
+        )}.`
+      );
+      return res
+        .status(HTTP_OK)
+        .json(
+          new ApiResultData(HTTP_OK, "Estado deletado com sucesso.", response)
+        );
+    } catch (error) {
+      LOGGER.error(JSON.stringify(error));
+      next(
+        new ApiException(
+          error.httpStatus || HTTP_BAD_REQUEST,
+          "Não foi possível deletar este estado. Por favor, tente novamente. Detalhes do erro: " +
+            error.message,
+          { code: error.code, message: error.message }
+        )
+      );
+    }
+  }
 }
 
 module.exports = new StateController();
