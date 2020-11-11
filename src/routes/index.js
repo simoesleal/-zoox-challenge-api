@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const LOGGER = require("../logger").createLogger("Default");
+const ApiHeaderMiddleware = require("../middlewares/ApiHeaderMiddleware");
 const ApiException = require("../exceptions/ApiException");
 
 const State = require("../api/state/state.router");
@@ -25,8 +26,8 @@ router.get("/err", (req, res, next) => {
   });
 });
 
-router.use("/states", State);
+router.use("/states", ApiHeaderMiddleware.interceptHeaderXAPIID, State);
 
-router.use("/cities", City);
+router.use("/cities", ApiHeaderMiddleware.interceptHeaderXAPIID, City);
 
 module.exports = router;
