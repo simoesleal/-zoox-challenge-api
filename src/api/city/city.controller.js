@@ -173,7 +173,7 @@ class CityController {
       return res
         .status(HTTP_OK)
         .json(
-          new ApiResultData(HTTP_OK, "Estado deletado com sucesso.", response)
+          new ApiResultData(HTTP_OK, "Cidade deletada com sucesso.", response)
         );
     } catch (error) {
       LOGGER.error(JSON.stringify(error));
